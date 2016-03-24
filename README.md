@@ -5,6 +5,7 @@ Uses
 - HAProxy
 - Docker Containers
 - Running in Linux
+- [Docker Tools for Visual Studio](http://aka.ms/DockerToolsForVS)
  
 
 ## Getting it going ##
