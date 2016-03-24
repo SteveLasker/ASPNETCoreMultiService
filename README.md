@@ -22,5 +22,9 @@ This will instance a total of 3 web containers
 
 Since we're taking shortcuts here, just using the linked containers aspect of compose, instead of using the HAProxy configuration, we need to wait a bit for the --force-recreate to complete
 
+## It's a visual world ##
+To get a sense of what's going on, use this handy dandy visualizer from the docker team:
+
+``` docker run -d -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui ```
 
 
