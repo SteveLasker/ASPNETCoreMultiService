@@ -1,6 +1,5 @@
 # ASPNETCoreMultiService
-A sample for scaling ASP.NET 5 Core
-Uses 
+A sample for scaling ASP.NET 5 Core that uses:
 - ASP.NET 5
 - HAProxy
 - Docker Containers
@@ -10,10 +9,13 @@ Uses
 
 ## Getting it going ##
 Build the project
-Using Visual Studio 2015, and the docker assets in the project, simply choose debug or release versions and F5 the project
+Using Visual Studio 2015, open the project. We've already included the docker assets for debug, release, and scale. 
+
+From within Visual Studio, simply choose debug or release and build the project. 
+
 Alternatively, from the root of the project, run the following PowerShell cmd
 
-```  .\Docker\DockerTask.ps1 -Run -Environment release ```
+```  .\Docker\DockerTask.ps1 -Run -Environment release -machine default ```
 
 ## Scale Er Up ###
 Once the project is built, use the DockerTask.ps1 script with the docker-compose.scale.yml config file:
