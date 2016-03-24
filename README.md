@@ -20,19 +20,19 @@ Once the project is built, use the DockerTask.ps1 script with the docker-compose
 
 ``` .\Docker\DockerTask.ps1 -Run -Environment scale -machine default ```
 
-Or, use docker-compose directly
+Or, use docker-compose directly to instance 1 HAProxy load balancer, and one instance of your web container
 
 ``` docker-compose  -f .\docker\docker-compose.scale.yml up -d ```
 
-That will instance 1 HAProxy load balancer, and one instance of your web container
+Scale up to a total of 3 web containers
 
 ``` docker-compose  -f .\docker\docker-compose.scale.yml scale web=3 ```
 
-This will instance a total of 3 web containers
+Reset HAProxy to route to the additional containers:
 
 ``` docker-compose  -f .\docker\docker-compose.scale.yml up --force-recreate -d ```
 
-Since we're taking shortcuts here, just using the linked containers aspect of compose, instead of using the HAProxy configuration, we need to wait a bit for the --force-recreate to complete
+*Since we're taking shortcuts here, just using the linked containers aspect of compose, instead of using the HAProxy configuration, we need to wait a bit for the --force-recreate to complete*
 
 ## It's a visual world ##
 To get a sense of what's going on, use this handy dandy visualizer from the docker team:
