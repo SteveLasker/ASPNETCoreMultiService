@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: Docker/Dockerfile.debug
+      args:
+      - CONTAINER_PORT=${WEB_PORT}
+      - SERVER_URLS=http://*:${WEB_PORT}
+    ports:
+    - "${HOST_PORT}:${WEB_PORT}"
+    volumes:
+    - ..:/app
