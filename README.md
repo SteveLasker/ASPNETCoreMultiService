@@ -1,5 +1,12 @@
 # ASPNETCoreMultiService
-A sample for scaling ASP.NET 5/Core
+A sample for scaling ASP.NET 5 Core
+Uses 
+- ASP.NET 5
+- HAProxy
+- Docker Containers
+- Running in Linux
+ 
+
 ## Getting it going ##
 Build the project
 Using Visual Studio 2015, and the docker assets in the project, simply choose debug or release versions and F5 the project
