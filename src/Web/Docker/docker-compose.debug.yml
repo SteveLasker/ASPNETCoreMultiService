@@ -6,9 +6,9 @@ services:
       context: ..
       dockerfile: Docker/Dockerfile.debug
       args:
-      - CONTAINER_PORT=${WEB_PORT}
-      - SERVER_URLS=http://*:${WEB_PORT}
+      - CONTAINER_PORT=80
+      - SERVER_URLS=http://*:80
     ports:
-    - "${HOST_PORT}:${WEB_PORT}"
+    - "80:80"
     volumes:
     - ..:/app

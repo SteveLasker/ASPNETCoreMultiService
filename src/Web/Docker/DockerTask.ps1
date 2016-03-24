@@ -80,7 +80,7 @@ Param(
     [parameter(ParameterSetName = "Build", Position = 6, Mandatory = $False)]
     [parameter(ParameterSetName = "Run", Position = 5, Mandatory = $False)]
     [ValidateNotNullOrEmpty()]
-    [String]$ContainerPort = 5000,
+    [String]$ContainerPort = 80,
     [parameter(ParameterSetName = "Build", Position = 7, Mandatory = $False)]
     [parameter(ParameterSetName = "Run", Position = 6, Mandatory = $False)]
     [ValidateNotNullOrEmpty()]
