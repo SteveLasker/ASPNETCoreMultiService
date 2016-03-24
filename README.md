@@ -16,7 +16,11 @@ Alternatively, from the root of the project, run the following PowerShell cmd
 ```  .\Docker\DockerTask.ps1 -Run -Environment release ```
 
 ## Scale Er Up ###
-Once the project is built, use the docker-compose.scale.yml file with the following
+Once the project is built, use the DockerTask.ps1 script with the docker-compose.scale.yml config file:
+
+``` .\Docker\DockerTask.ps1 -Run -Environment scale -machine default ```
+
+Or, use docker-compose directly
 
 ``` docker-compose  -f .\docker\docker-compose.scale.yml up -d ```
 
@@ -34,5 +38,3 @@ Since we're taking shortcuts here, just using the linked containers aspect of co
 To get a sense of what's going on, use this handy dandy visualizer from the docker team:
 
 ``` docker run -d -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui ```
-
-
