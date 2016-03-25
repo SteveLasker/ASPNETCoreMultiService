@@ -8,6 +8,9 @@ A sample for scaling ASP.NET 5 Core that uses:
  
 
 ## Getting it going ##
+First, lets clear out any containers. It's a good idea to give us a clean state
+``` docker rm -f $(docker ps -a -q) ```
+
 Build the project
 Using Visual Studio 2015, open the project. We've already included the docker assets for debug, release, and scale. 
 
@@ -15,24 +18,16 @@ From within Visual Studio, simply choose debug or release and build the project.
 
 Alternatively, from the root of the project, run the following PowerShell cmd
 
-```  .\Docker\DockerTask.ps1 -Run -Environment release -machine default ```
+```  .\Docker\DockerTask.ps1 -Run -Environment release -ProjectName web -machine default ```
 
 ## Scale Er Up ###
-Once the project is built, use the DockerTask.ps1 script with the docker-compose.scale.yml config file:
-
-``` .\Docker\DockerTask.ps1 -Run -Environment scale -machine default ```
-
-Or, use docker-compose directly to instance 1 HAProxy load balancer, and one instance of your web container
-
-``` docker-compose  -f .\docker\docker-compose.scale.yml up -d ```
-
 Scale up to a total of 3 web containers
 
-``` docker-compose  -f .\docker\docker-compose.scale.yml scale web=3 ```
+``` docker-compose -f .\docker\docker-compose.scale.yml -p web scale web=3 ```
 
 Reset HAProxy to route to the additional containers:
 
-``` docker-compose  -f .\docker\docker-compose.scale.yml up --force-recreate -d ```
+``` docker-compose -f .\docker\docker-compose.scale.yml -p web up --force-recreate -d ```
 
 *Since we're taking shortcuts here, just using the linked containers aspect of compose, instead of using the HAProxy configuration, we need to wait a bit for the --force-recreate to complete*
 
