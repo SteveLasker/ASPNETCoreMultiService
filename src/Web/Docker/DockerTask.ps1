@@ -99,11 +99,13 @@ function Clean() {
     if (Test-Path $composeFileName) {
         Write-Host "Cleaning image $ImageName"
 
+        Write-Error "Executing: docker-compose -f $composeFileName -p $ProjectName kill" -foregroundcolor "green"
         cmd /c docker-compose -f $composeFileName -p $ProjectName kill "2>&1"
         if($? -eq $False) {
             Write-Error "Failed to kill the running containers"
         }
 
+        Write-Error "Executing: docker-compose -f $composeFileName -p $ProjectName rm -f" -foregroundcolor "green"
         cmd /c docker-compose -f $composeFileName -p $ProjectName rm -f "2>&1"
         if($? -eq $False) {
             Write-Error "Failed to remove the stopped containers"
@@ -116,6 +118,7 @@ function Clean() {
             $imageName = $_.Line.split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)[0];
             $tag = $_.Line.split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)[1];
             Write-Host "Removing image ${imageName}:$tag";
+            Write-Host Executing: rmi ${imageName}:$tag;
             docker rmi ${imageName}:$tag *>&1 | Out-Null
         }
     }
@@ -135,6 +138,7 @@ function Build () {
             $buildArgs = "--no-cache"
         }
 
+        Write-Host "Executing: docker-compose -f $composeFileName -p $ProjectName build $buildArgs" -foregroundcolor "green"
         cmd /c docker-compose -f $composeFileName -p $ProjectName build $buildArgs "2>&1"
         if($? -eq $False) {
             Write-Error "Failed to build the image"
@@ -142,6 +146,7 @@ function Build () {
 
         $tag = [System.DateTime]::Now.ToString("yyyy-MM-dd_HH-mm-ss")
 
+        Write-Host "Executing: docker tag $ImageName ${ImageName}:$tag" -foregroundcolor "green"
         cmd /c docker tag $ImageName ${ImageName}:$tag "2>&1"
         if($? -eq $False) {
             Write-Error "Failed to tag the image"
@@ -162,9 +167,11 @@ function Run () {
         if ($conflictingContainerIds) {
             $conflictingContainerIds = $conflictingContainerIds -Join ' '
             Write-Host "Stopping conflicting containers using port $HostPort"
+
+            Write-Host "Executing: docker stop $conflictingContainerIds"  -foregroundcolor "green"
             cmd /c docker stop $conflictingContainerIds "2>&1"
         }
-
+        Write-Host "Executing: docker-compose -f $composeFileName -p $ProjectName up -d"  -foregroundcolor "green"
         cmd /c docker-compose -f $composeFileName -p $ProjectName up -d "2>&1"
         if($? -eq $False) {
             Write-Error "Failed to build the images"
