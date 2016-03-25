@@ -4,6 +4,7 @@ A sample for scaling ASP.NET 5 Core that uses:
 - HAProxy
 - Docker Containers
 - Running in Linux
+- [Docker For Windows Beta](http://beta.docker.com)
 - [Docker Tools for Visual Studio](http://aka.ms/DockerToolsForVS)
  
 
